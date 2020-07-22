@@ -1,7 +1,7 @@
 import React from 'react';
+import LoginModal from './components/login-modal';
 
 import './login.css';
-import LoginModal from './components/login-modal';
 
 function Login() {
   return (

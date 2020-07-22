@@ -5,3 +5,8 @@ input {
   text-transform: uppercase;
   width: 50%;
 }
+
+.rnx-card {
+  min-height: 400px;
+  width: 800px;
+}

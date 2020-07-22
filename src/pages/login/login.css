@@ -8,7 +8,8 @@
 rnx-chat-room {
   float: left;
 }
-rnx-login-modal {
+
+.rnx-login-modal {
   min-height: 600px;
   width: 800px;
 }
