@@ -1077,6 +1077,16 @@
     lodash "^4.17.19"
     to-fast-properties "^2.0.0"
 
+"@bloc-js/bloc@^2.1.0":
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/@bloc-js/bloc/-/bloc-2.1.0.tgz#40b6a7553219a3561d10565aa6781f961b1bb624"
+  integrity sha512-CYQqpW76djNaVy18icmMSbclwvnj3icHDOO8FWLOx8w6Sh/MEWV/EvM9OGId90dgM0fg1fvXCJHJqrilefLIwQ==
+
+"@bloc-js/react-bloc@^2.3.0":
+  version "2.3.0"
+  resolved "https://registry.yarnpkg.com/@bloc-js/react-bloc/-/react-bloc-2.3.0.tgz#c5418b9252ba88b005fc89a71bfb5b6a5407f894"
+  integrity sha512-/aJC4wLgOTsa3GdhHjQXUrwNiyTVA5hEQRpu9rmWhhY0nC8tBcqDJxyxQTlkX2mP2BnCQnsDYtvjdkMEv4fY3w==
+
 "@cnakazawa/watch@^1.0.3":
   version "1.0.4"
   resolved "https://registry.yarnpkg.com/@cnakazawa/watch/-/watch-1.0.4.tgz#f864ae85004d0fcab6f50be9141c4da368d1656a"

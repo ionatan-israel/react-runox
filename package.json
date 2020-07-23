@@ -3,6 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@bloc-js/bloc": "^2.1.0",
+    "@bloc-js/react-bloc": "^2.3.0",
     "@runox-game/game-engine": "^0.0.20",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",

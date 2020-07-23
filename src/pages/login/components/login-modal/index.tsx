@@ -1,6 +1,7 @@
 import React from 'react';
-import logo from '../../../../assets/images/logo.png';
-import { Card, Button } from '../../../../shared';
+
+import logo from 'assets/images/logo.png';
+import { Button, Card } from 'shared';
 import './login-modal.css';
 
 function LoginModal() {
