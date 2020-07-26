@@ -1,0 +1,7 @@
+screen#1 => login modal
+
+if LoginStatus ===
+screen#2 => {
+  - mostrar input
+  - bind title (room name)
+}

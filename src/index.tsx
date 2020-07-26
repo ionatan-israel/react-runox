@@ -1,14 +1,17 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './app/App';
-import * as serviceWorker from './serviceWorker';
 
+import App from 'app/App';
+import { Router } from 'app/router';
 import './assets/css/tailwind.min.css';
 import './index.css';
+import * as serviceWorker from './serviceWorker';
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <Router>
+      <App />
+    </Router>
   </React.StrictMode>,
   document.getElementById('root')
 );

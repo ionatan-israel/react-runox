@@ -1,15 +1,18 @@
 import React, { useContext } from 'react';
 
-import { Login } from 'pages';
-import { AppContext } from './context';
+import { AppContext, LoginContext } from './context';
+import { Routes } from './router';
 
 function App() {
 
   const appBloc = useContext(AppContext);
+  const loginBloc = useContext(LoginContext);
 
   return (
     <AppContext.Provider value={appBloc}>
-      <Login />
+      <LoginContext.Provider value={loginBloc}>
+        <Routes />
+      </LoginContext.Provider>
     </AppContext.Provider>
   );
 }
