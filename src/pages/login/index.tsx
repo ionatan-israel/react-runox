@@ -6,31 +6,28 @@ import { Button, Card } from 'shared';
 import './login.css';
 import { LoginStatus } from './login-bloc';
 import PlayerList from 'shared/player-list';
-
-function NoPlayers() {
-  return (
-    <div className="text-gray-400 uppercase text-sm tracking-wider">
-      Aún no se han añadido jugadores a la sala.
-    </div>
-  );
-}
+import { AuthState } from 'app/bloc';
+import { IPlayer } from '@runox-game/game-engine/lib/models/player.model';
 
 function Login() {
   // Hardcodeado!!!
-  const players: any[] = [];
-  const activePlayer: any = null;
+  const activePlayer: boolean = true;
   // BLoCs
   const appBloc = useContext(AppContext);
   const loginBloc = useContext(LoginContext);
   // LocalStates
+  const [players, setPlayers] = useState<IPlayer[]>([]);
   const [roomName, setRoomName] = useState<string>('');
+  const [roomNameFixed, setRoomNameFixed] = useState<boolean>();
+  const [state, setState] = useState<AuthState>();
   const [status, setStatus] = useState<LoginStatus>();
-  const [user, setUser] = useState<any>();
 
   useEffect(() => {
-    appBloc.user$.subscribe(setUser);
-    loginBloc.roomName$.subscribe(setRoomName);
+    appBloc.state$.subscribe(setState);
+    loginBloc.players$.subscribe(setPlayers);
     loginBloc.status$.subscribe(setStatus);
+    loginBloc.roomName$.subscribe(setRoomName);
+    loginBloc.roomNameFixed$.subscribe(setRoomNameFixed);
     return () => {
       appBloc.dispose();
       loginBloc.dispose();
@@ -49,29 +46,34 @@ function Login() {
         <div slot="content" className="text-center">
           <div className="opacity-75 text-sm">SALA</div>
 
-          {roomName ? <h1 className="text-2xl font-semibold uppercase">{roomName}</h1> : null}
+          {roomName
+            ? <h1 className="text-2xl font-semibold uppercase" onDoubleClick={() => loginBloc.addRoomNameFixed(false)}>{roomName}</h1>
+            : null}
 
-          <input
-            className='input-room'
-            value={roomName}
-            type='text'
-            placeholder='Room name here ...'
-            onChange={(e: any) => { loginBloc.addRoomName(e.target.value) }} />
+          {state === AuthState.AUTHENTICATED && !roomNameFixed
+            ? <input
+              className='input-room'
+              value={roomName}
+              type='text'
+              placeholder='Room name here ...'
+              onChange={(e: any) => { loginBloc.addRoomName(e.target.value) }}
+              onKeyPress={(event: any) => { if (event.key === 'Enter') loginBloc.addRoomNameFixed(true) }} />
+            : null}
 
           <div className="mt-6">
-            {status === LoginStatus.ENTER && roomName !== ''
-              ? <Button onClick={(e: any) => loginBloc.join()}>LOGIN & JOIN ROOM!</Button> : null}
-
-            {status === LoginStatus.ENTER && roomName === ''
+            {state !== AuthState.AUTHENTICATED
               ? <Button onClick={(e: any) => loginBloc.join()}>LOGIN & CREATE ROOM!</Button> : null}
 
-            {status === LoginStatus.OWNER && roomName === ''
-              ? <Button onClick={(e: any) => loginBloc.join()}>CREATE ROOM!</Button> : null}
+            {state !== AuthState.AUTHENTICATED && roomName !== ''
+              ? <Button onClick={(e: any) => loginBloc.join()}>LOGIN & JOIN ROOM!</Button> : null}
 
-            {status === LoginStatus.OWNER && roomName !== ''
+            {state === AuthState.AUTHENTICATED && !roomNameFixed
+              ? <Button onClick={(e: any) => loginBloc.create()}>CREATE ROOM!</Button> : null}
+
+            {status === LoginStatus.OWNER && roomNameFixed
               ? <Button onClick={(e: any) => loginBloc.join()}>START THE GAME!</Button> : null}
 
-            {status === LoginStatus.WAITING && roomName !== ''
+            {status === LoginStatus.WAITING && roomNameFixed
               ?
               <div className="px-4 text-4xl text-red-700 font-semibold">
                 WAITING FOR THE OWNER TO START THE GAME
@@ -86,10 +88,7 @@ function Login() {
             PLAYERS
           </div>
 
-          {players.length > 0
-            ? <PlayerList players={players} activePlayer={activePlayer} />
-            : <NoPlayers />
-          }
+          <PlayerList players={players} activePlayer={activePlayer} />
 
         </div>
 

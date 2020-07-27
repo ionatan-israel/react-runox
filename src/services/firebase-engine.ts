@@ -21,7 +21,8 @@ class FirebaseEngineService {
 
   createRoom(roomName: string): Promise<any> {
     let _state = this.gameEngine.game.gameStateAsJSON;
-    debugger;
+    console.log(roomName);
+    // debugger;
     _state = JSON.parse(JSON.stringify(_state));
     const room = Object.assign(
       {},
@@ -48,7 +49,7 @@ class FirebaseEngineService {
         name: roomName
       }
     );
-    debugger;
+    // debugger;
     return this.roomsCollection.doc(roomName).update(room);
   }
 }

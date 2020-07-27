@@ -5,6 +5,7 @@ import { Player } from '@runox-game/game-engine/lib/models/player.model';
 
 export class GameEngineService {
   game = new GameEngine();
+  public playerId: string | null = null;
 
   constructor() {
     firebase.firestore().collection('rooms');

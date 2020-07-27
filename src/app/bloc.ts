@@ -1,4 +1,5 @@
 import { BehaviorSubject, Observable } from 'rxjs';
+import { IPlayer } from '@runox-game/game-engine/lib/models/player.model';
 
 export enum AuthState {
   AUTHENTICATED,
@@ -12,7 +13,7 @@ class AppBloc {
   // [Controllers] - Observable/Stream to handle the data input
   private _owner$ = new BehaviorSubject<boolean>(true);
   private _state$ = new BehaviorSubject<AuthState>(AuthState.UNINITIALIZED);
-  private _user$ = new BehaviorSubject<any>(null);
+  private _user$ = new BehaviorSubject<IPlayer | null>(null);
 
   // [Subscriptions] - Retrieve data from Observable/Stream
   get owner$(): Observable<boolean> {

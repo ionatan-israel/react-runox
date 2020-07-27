@@ -12,7 +12,7 @@ function Avatar({ badge, name, image }: any) {
       }
 
       <div className="rnx-avatar__conatiner">
-        <img src="avatarImage" className="rnx-avatar__image" alt="name" />
+        <img src={image} className="rnx-avatar__image" alt="name" />
 
         {badge ?
           <div className="rnx-avatar__badge">
